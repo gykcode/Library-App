@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Poppins:wght@500&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --aside-color: rgb(55, 59, 83);
+  --purple-color: rgb(77, 59, 146);
+  --purple-color-hover: rgb(146, 119, 255);
+  --withe-color: rgb(255, 255, 255);
+  --body-color: rgb(255, 255, 255);
+  --gray-color: rgb(37, 38, 39);
+  --red-color: rgb(236, 87, 87);
+  --red-color-hover: rgb(255, 151, 151);
+  --read-btn-background: rgba(51, 214, 159, 0.06);
+  --read-btn-color: rgb(51, 214, 159);
+  --read-btn-hover: rgba(51, 214, 159, 0.2);
+  --unread-btn-background: rgba(255, 143, 0, 0.06);
+  --unread-btn-color: rgb(255, 143, 0);
+  --unread-btn-hover: rgba(255, 143, 0, 0.2);
+  --pending-btn-background: rgba(55, 59, 83, 0.06);
+  --pending-btn-color: rgb(55, 59, 83);
+  --pending-btn-hover: rgba(55, 59, 83, 0.2);
+  --dark-mode-main-bg: rgb(20, 22, 37);
+  --dark-mode-cards-input-bg: rgb(30, 33, 57);
+  --dark-mode-pending-book: rgba(223, 227, 250, 0.06);
+  --dark-mode-pending-book-hover: rgba(223, 227, 250, 0.2);
+  --dark-mode-pending-color: rgb(223, 227, 250);
+}
+
+body {
+  background-color: var(--body-color);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: 0.5s all;
+}
+
+body.dark .container {
+  background-color: var(--dark-mode-main-bg);
+  transition: 0.5s all;
+  color: var(--withe-color);
+}
+
+.sidebar {
+  background-color: var(--purple-color);
+  display: flex;
+  align-items: center;
+  height: 80px;
+  position: sticky;
+  z-index: 20;
+}
+
+.logo {
+  display: flex;
+  height: 100%;
+  flex-grow: 2;
+  color: #000000;
+}
+
+.sidebar .logo .logo-icon {
+  width: 80px;
+  height: 80px;
+  background-color: var(--purple-color);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+}
+
+.sidebar .logo .logo-icon span {
+  font-size: 30px;
+  color: var(--withe-color);
+}
+
+.sidebar .theme {
+  margin: 0px 32px;
+  background-color: transparent;
+  border: none;
+}
+
+.sidebar .theme span {
+  font-size: 30px;
+  color: #f0f0f1;
+  cursor: pointer;
+}
+
+.sidebar .profile {
+  margin: 0px 32px;
+}
+
+.sidebar .profile i {
+  font-size: 30px;
+  color: #f0f0f1;
+}
+
+.main {
+  padding: 32px 24px;
+  max-width: 1100px;
+}
+
+.book-information {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.library-information {
+  flex: 1;
+}
+
+.library-information h1 {
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 50px 30px 30px 30px;
+  width: 100%;
+  max-width: 820px;
+  height: 100vh;
+  animation-name: animateleft;
+  animation-duration: 1s;
+}
+
+body.dark .modal-content {
+  background-color: var(--dark-mode-main-bg);
+  transition: 0.5s all;
+}
+
+.modal-content .input-title {
+  font-weight: 400;
+  color: var(--purple-color);
+}
+
+.modal-content form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content form .options {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.modal-content form .options .input {
+  border-radius: 5px;
+  padding: 15px 25px;
+  border: 1px solid var(--gray-color);
+}
+
+body.dark .modal-content form .options .input {
+  background-color: var(--dark-mode-cards-input-bg);
+  border: 1px solid rgb(37, 41, 69);
+  color: #fff;
+  font-size: 20px;
+}
+
+body.dark .modal-content form .options .input:focus {
+  border: 1px solid var(--purple-color-hover);
+}
+
+.modal-content form .options .input:focus {
+  outline: none;
+}
+
+.modal-content form .options .input:focus-visible {
+  border: 3px solid var(--purple-color);
+}
+
+.modal-content form .options .select-book-status {
+  border: 1px solid var(--gray-color);
+  padding: 10px 20px;
+  background-color: var(--withe-color);
+}
+
+body.dark .modal-content form .options .select-book-status {
+  background-color: var(--dark-mode-cards-input-bg);
+  border: 1px solid rgb(37, 41, 69);
+}
+
+.modal-content form .options .select-book-status:focus {
+  outline: none;
+}
+
+.modal-content form .options .select-book-status:focus-visible {
+  border: 3px solid var(--purple-color);
+}
+
+.modal-content form .btns {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-content form .btns .discard-book-btn {
+  border: none;
+  background-color: var(--red-color);
+  color: var(--withe-color);
+  font-weight: 700;
+  border-radius: 30px;
+  padding: 16px 24px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.modal-content form .btns .discard-book-btn:hover {
+  background-color: var(--red-color-hover);
+}
+
+.modal-content form .btns .add-book-btn {
+  border: none;
+  background-color: var(--purple-color);
+  color: var(--withe-color);
+  font-weight: 700;
+  border-radius: 30px;
+  padding: 16px 24px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.modal-content form .btns .add-book-btn:hover {
+  background-color: var(--purple-color-hover);
+}
+
+@keyframes animateleft {
+  from {
+    left: -300px;
+    opacity: 0;
+  }
+  to {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+.new-book-btn {
+  flex: 0.4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--purple-color);
+  border: none;
+  color: var(--withe-color);
+  font-size: 18px;
+  font-weight: 500;
+  height: 50px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.new-book-btn span {
+  color: var(--withe-color);
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.new-book-btn:hover {
+  background-color: var(--purple-color-hover);
+}
+
+.books {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.5;
+  border: 1px solid transparent;
+  background-color: var(--withe-color);
+  padding: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.5s all;
+}
+
+body.dark .book {
+  background-color: var(--dark-mode-cards-input-bg);
+  transition: 0.5s all;
+}
+
+.book:hover {
+  border-color: var(--purple-color);
+}
+
+.btn {
+  margin: 5px 0px 5px 0px;
+  width: 60px;
+  height: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: 0.5s;
+}
+
+.read {
+  background-color: var(--read-btn-background);
+  border: none;
+  color: var(--read-btn-color);
+}
+
+.read:hover {
+  background-color: var(--read-btn-hover);
+}
+
+.unread {
+  background-color: var(--unread-btn-background);
+  border: none;
+  color: var(--unread-btn-color);
+}
+
+.unread:hover {
+  background-color: var(--unread-btn-hover);
+}
+
+.pending {
+  background-color: var(--pending-btn-background);
+  border: none;
+  color: var(--pending-btn-color);
+}
+
+body.dark .pending {
+  background-color: var(--dark-mode-pending-book);
+  color: var(--dark-mode-pending-color);
+  transition: 0.5s all;
+}
+
+.pending:hover {
+  background-color: var(--pending-btn-hover);
+}
+
+body.dark .pending:hover {
+  background-color: var(--dark-mode-pending-book-hover);
+}
+
+.book-button {
+  border: none;
+  background-color: var(--red-color);
+  color: var(--withe-color);
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+  width: 60px;
+  height: 20px;
+}
+
+.book-button:hover {
+  background-color: var(--red-color-hover);
+}
+
+.book-title {
+  font-weight: 700;
+}
+
+.book-author {
+  font-weight: lighter;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+    font-size: 8px;
+}
+
+@media screen and (min-width: 900px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .sidebar {
+    flex-direction: column;
+    height: 100vh;
+    border-radius: 0px 20px 20px 0px;
+    width: 93px;
+  }
+
+  .sidebar .logo .logo-icon {
+    width: 93px;
+  }
+
+  .sidebar .theme {
+    padding: 34px;
+  }
+
+  .sidebar .profile {
+    padding: 32px;
+  }
+
+  .modal-content {
+    padding-left: 120px;
+    border-radius: 0px 20px 20px 0px;
+  }
+
+  .main {
+    padding: 50px 24px;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .library-information {
+    flex: 2;
+  }
+
+  .new-book-btn {
+    justify-content: space-around;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .book {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
